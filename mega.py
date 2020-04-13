@@ -68,23 +68,28 @@ def main():
     header = {"Host": "megarun.dialog.lk",
               "Authorization": auth, "X-Unity-Version": "2018.3.0f2"}
     url = url1
-    total = 0
+    
     ss = 0
     while s > ss:
+        os.system("clear")
+        print(name)
         size = 0
         res = requests.get(url, headers=header)
-        resp = res.text
+        resp = str(res)
+        if resp == '<Response [204]>':
+            print(bar)
+            print("\n\033[1;32;40m [+] No Data ... [+]")
+            print(bar)  
+        elif resp == '<Response [200]>':
+            print(bar)
+            print("\n\033[1;32;40m [+] You Won Check Balance ... [+]")
+            print(bar)
+        else:
+            print(bar)
+            print("\n\033[1;31;40m [+] Check Again, I think You are Blocked User... [+]")
+            print(bar)
         
-        try:
-            print(resp["size"])
-            size = resp["size"]
-        except:
-            size = 0
-        total=total+size
-        strtotal = str(total)
-        print(bar)
-        print("\n\033[1;32;40m [+] You Earned Now - "+strtotal,"Mb [+]")
-        print(bar)
+
         ss+=1
         print("\033[1;0;40m\n",str(ss), "Please Wait For Next request",end="")
         for i in range(180):
@@ -94,8 +99,7 @@ def main():
             
             time.sleep(0.5)
             sys.stdout.write("\033[F")
-        os.system("clear")
-        print(name)
+        
     os.system('figlet FINISHED')
     again()
 
