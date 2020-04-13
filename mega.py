@@ -74,7 +74,9 @@ def main():
         size = 0
         res = requests.get(url, headers=header)
         resp = res.text
+        
         try:
+            print(resp["size"])
             size = resp["size"]
         except:
             size = 0
